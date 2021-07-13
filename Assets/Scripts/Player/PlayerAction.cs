@@ -16,7 +16,7 @@ namespace Game
             deltaTime = 0f;
             this.owner.GetAnimator().Play("Attack");
             
-            Debug.Log("player Action entering");
+            Debug.Log("player Action Entering");
         }
 
         public override void OnUpdating(float dt)

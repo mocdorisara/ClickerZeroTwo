@@ -15,15 +15,13 @@ namespace Game
         {
             deltaTime = 0f;
             this.owner.GetAnimator().Play("Dance");
-            Debug.Log("player Idle entering");
+            Debug.Log("player Dance Entering");
         }
 
         public override void OnUpdating(float dt)
         {
             deltaTime += dt;
             if (deltaTime > 1) this.owner.GetSTateMachine().ChangeState((int)Player.PlayerState.PlayerDie);
-
-            Debug.Log("player Idle updating");
         }
 
         public override void OnExiting()
