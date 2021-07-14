@@ -6,30 +6,33 @@ namespace Game {
     {
         public enum PlayerState
         {
-            PlayerIdle = 1,
-            PlayerAction = 2,
-            PlayerDance = 3,
-            PlayerDie = 4,
+            PlayerIdle = 0,
+            PlayerDance = 1,
         }
 
         StateMachine<Player> stateMachine;
         GameObject playerObject;
+        GameObject headObject;
 
         Animator playerAnimator;
 
         public Animator GetAnimator() => playerAnimator;
         
-        public Player(GameObject playerObject)
+        public Player()
         {
-            
-            this.playerObject = playerObject;
+
+            Debug.Log("Player");
+            Object _object = Resources.Load("Characters/PartsTest/Prefabs/PartTest");
+
+            this.playerObject = (GameObject)GameObject.Instantiate(_object);
+            this.playerObject.transform.position = new Vector3Int(0, -5, 0);
+            headObject = this.playerObject.transform.Find("head").gameObject;
+
             playerAnimator = this.playerObject.GetComponent<Animator>();
             
             stateMachine = new StateMachine<Player>();
             stateMachine.AddState((int)PlayerState.PlayerIdle, new PlayerIdle(this));
-            stateMachine.AddState((int)PlayerState.PlayerAction, new PlayerAction(this));
             stateMachine.AddState((int)PlayerState.PlayerDance, new PlayerDance(this));
-            stateMachine.AddState((int)PlayerState.PlayerDie, new PlayerDie(this));
 
             stateMachine.SetState((int)PlayerState.PlayerIdle);
         }
@@ -39,6 +42,11 @@ namespace Game {
         public void OnUpdate(float dt)
         {
             stateMachine.OnUpdate(dt);
+        }
+
+        public void SetHeadSprite(Sprite headSprite)
+        {
+            headObject.GetComponent<SpriteRenderer>().sprite = headSprite;
         }
 
     }

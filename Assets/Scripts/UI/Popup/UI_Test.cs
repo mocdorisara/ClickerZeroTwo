@@ -5,14 +5,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D;
 
 namespace Game.UI.Popup
 {
     public class UI_Test : UI_Popup
     {
+        Sprite[] heads = null;
+
         enum GameObjects
         {
-            CloseButton,
+            Head0,
+            Head1,
+            Head2,
+            Head3,
         }
 
         enum TextMeshPros
@@ -31,6 +37,7 @@ namespace Game.UI.Popup
 
             BindObjects();
             RefreshText();
+            heads = Resources.LoadAll<Sprite>("Characters/PartsTest/Parts/Head/head");
 
         }
 
@@ -39,8 +46,25 @@ namespace Game.UI.Popup
             Bind<GameObject>(typeof(GameObjects));
             Bind<TextMeshProUGUI>(typeof(TextMeshPros));
 
-            GameObject closeButton = GetObject((int)GameObjects.CloseButton);
-            AddUIEvent(closeButton, (evt) => { GameManagers.UI.ClosePopupUI(); }, Define.UIEvent.Click);
+            GameObject head0 = GetObject((int)GameObjects.Head0);
+            AddUIEvent(head0, (evt) => {
+                GameManagers.Player.SetHeadSprite(heads[0]);
+            }, Define.UIEvent.Click);
+
+            GameObject head1 = GetObject((int)GameObjects.Head1);
+            AddUIEvent(head1, (evt) => { 
+                GameManagers.Player.SetHeadSprite(heads[1]); 
+            }, Define.UIEvent.Click);
+
+            GameObject head2 = GetObject((int)GameObjects.Head2);
+            AddUIEvent(head2, (evt) => {
+                GameManagers.Player.SetHeadSprite(heads[2]);
+            }, Define.UIEvent.Click);
+
+            GameObject head3 = GetObject((int)GameObjects.Head3);
+            AddUIEvent(head3, (evt) => {
+                GameManagers.Player.SetHeadSprite(heads[3]);
+            }, Define.UIEvent.Click);
         }
 
         public override void RefreshText()

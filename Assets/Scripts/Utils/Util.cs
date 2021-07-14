@@ -18,9 +18,22 @@ namespace Game.Utils
         const float SCREEN_HEIGHT = 1080.0f;
         const float SCREEN_WIDTH = 1920.0f;
 
+        Action action = null;
+
+        public void test()
+        {
+            if (action != null)
+            {
+                action.Invoke();
+            }
+        }
+
         public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
         {
             UnityEngine.Debug.Log(typeof(T).Name);
+
+            
+
             
             T component = go.GetComponent<T>();
             if (component == null)

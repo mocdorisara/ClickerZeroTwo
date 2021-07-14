@@ -20,8 +20,8 @@ namespace Game
 
         public override void OnUpdating(float dt)
         {
-            deltaTime += dt;
-            if (deltaTime > 1) this.owner.GetSTateMachine().ChangeState((int)Player.PlayerState.PlayerDie);
+            //deltaTime += dt;
+            //if (deltaTime > 1) this.owner.GetSTateMachine().ChangeState((int)Player.PlayerState.PlayerDie);
         }
 
         public override void OnExiting()

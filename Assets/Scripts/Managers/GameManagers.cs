@@ -1,29 +1,29 @@
 using Game.UI.Popup;
+using System;
 using UnityEngine;
 
 namespace Game.Managers
 {
     public class GameManagers : MonoBehaviour
     {
-        Player player = null;
-
+        public static Player Player = null;
         public static UIManager UI = new UIManager();
         public static ResourceManager Resource = new ResourceManager();
-        
+
 
         void Start()
         {
-            Object _rawObject = Resources.Load("Characters/Plunka/Prefabs/Plunkah");
-            player = new Player((GameObject)GameObject.Instantiate(_rawObject));
-
+            Player = new Player();
             UI.ShowPopupUI<UI_Test>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (player != null) player.OnUpdate(Time.deltaTime);
+            if (Player != null) Player.OnUpdate(Time.deltaTime);
         }
+
+        
     }
 
 }
