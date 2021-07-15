@@ -124,6 +124,8 @@ namespace Game.UI
 
 
         public virtual void OnFocus() { }
+
+        public virtual void CastMessage(string message) { }
     }
 
 }

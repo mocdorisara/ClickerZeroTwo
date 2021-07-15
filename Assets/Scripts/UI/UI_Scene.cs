@@ -6,7 +6,6 @@ namespace Game.UI
     {
         public override void Init()
         {
-            GameManagers.UI.CloseAllPopupUI();
             GameManagers.UI.SetCanvas(gameObject, false);
         }
     }

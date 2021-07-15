@@ -9,7 +9,7 @@ using UnityEngine.U2D;
 
 namespace Game.UI.Popup
 {
-    public class UI_Test : UI_Popup
+    public class UI_Test : UI_Scene
     {
         Sprite[] heads = null;
 
