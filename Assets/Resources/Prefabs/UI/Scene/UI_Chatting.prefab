@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5615269934263298570}
   - component: {fileID: 5615269934263298565}
   m_Layer: 5
-  m_Name: Banner
+  m_Name: ChattingArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

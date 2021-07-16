@@ -9,13 +9,14 @@ namespace Game.Managers
     public class UICommandMessage
     {
         public string TargetUID { get; set; }
-        public string Message { get; set; }
-        public UICommandMessage(string targetUID, string message)
+        public UIMessage Message { get; set; }
+        public UICommandMessage(string targetUID, UIMessage message)
         {
             TargetUID = targetUID;
             Message = message;
         }        
     }
+
     public class GameManagers : MonoBehaviour
     {
         public static Player Player = null;
@@ -43,7 +44,10 @@ namespace Game.Managers
         void InitUI()
         {
             UI_StatusBar uiStatusBar = UI.ShowSceneUI<UI_StatusBar>();
+            UI_Chatting uiChatting= UI.ShowSceneUI<UI_Chatting>();
+
             sceneDictionary.Add(typeof(UI_StatusBar).Name, uiStatusBar);
+            sceneDictionary.Add(typeof(UI_Chatting).Name, uiChatting);
         }
 
         // Update is called once per frame
@@ -56,7 +60,7 @@ namespace Game.Managers
 
             if(uiCommandMessageQueue.Count > 0)
             {
-                UICommandMessage uiCommandMessage = uiCommandMessageQueue.Peek();
+                UICommandMessage uiCommandMessage = uiCommandMessageQueue.Dequeue();
                 sceneDictionary.TryGetValue(uiCommandMessage.TargetUID, out UI_Base uiBase);
 
                 if (uiBase) CastMessage(uiBase, uiCommandMessage.Message);
@@ -70,7 +74,7 @@ namespace Game.Managers
         }
 
 
-        void CastMessage(UI_Base uiScene, string message)
+        void CastMessage(UI_Base uiScene, UIMessage message)
         {
             uiScene.CastMessage(message);
         }

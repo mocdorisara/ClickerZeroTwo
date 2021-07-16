@@ -9,6 +9,11 @@ using UnityEngine.U2D;
 
 namespace Game.UI.Popup
 {
+    public class UIStatusBarMessage : UIMessage
+    {
+
+    }
+
     public class UI_StatusBar : UI_Scene
     {
         enum GameObjects
@@ -53,9 +58,9 @@ namespace Game.UI.Popup
 
         Dictionary<string, Action> castFunction = new Dictionary<string, Action>();
 
-        public override void CastMessage(string message)
+        public override void CastMessage(UIMessage message)
         {
-            castFunction.TryGetValue(message, out Action action);
+            castFunction.TryGetValue(message.action, out Action action);
             if (action != null) action.Invoke();
         }
 

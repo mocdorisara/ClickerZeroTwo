@@ -8,6 +8,10 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
+    public class UIMessage
+    {
+        public string action;
+    }
 
     public abstract class UI_Base : MonoBehaviour
     {
@@ -125,7 +129,7 @@ namespace Game.UI
 
         public virtual void OnFocus() { }
 
-        public virtual void CastMessage(string message) { }
+        public virtual void CastMessage(UIMessage message) { }
     }
 
 }

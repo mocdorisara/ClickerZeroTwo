@@ -1,6 +1,8 @@
 using Game.Managers;
+using Game.UI;
 using Game.UI.Popup;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -16,6 +18,7 @@ namespace Game
         string id;
         string message;
     }
+
 
     public class Chatting
     {
@@ -50,6 +53,21 @@ namespace Game
                 OutUser(userId);
             }
 
+            if (true)
+            {
+                if (userList.Count == 0) return;
+
+                string userId = userList[Random.Range(0, userList.Count)];
+                int length = Random.Range(0, 20);
+                AddUserChatting(userId, RandomString(length));
+            }
+        }
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[Random.Range(0, s.Length)]).ToArray());
         }
 
         private void AddUser(string id)
@@ -57,7 +75,8 @@ namespace Game
             if (userSet.Add(id))
             {
                 userList.Add(id);
-                GameManagers.PushCastMessage(new UICommandMessage(typeof(UI_StatusBar).Name, "RefreshText"));
+
+                GameManagers.PushCastMessage(new UICommandMessage(typeof(UI_StatusBar).Name, new UIStatusBarMessage() { action = "RefreshText" }));
             }
         }
 
@@ -71,7 +90,12 @@ namespace Game
 
         private void AddUserChatting(string id, string message)
         {
-            chattingQueue.Enqueue(new ChattingMessage(id, message));
+            UIChattingMessage uiChattingMesssage = new UIChattingMessage();
+            uiChattingMesssage.Id = id;
+            uiChattingMesssage.Message = message;
+            uiChattingMesssage.action = "AddMessage";
+
+            GameManagers.PushCastMessage(new UICommandMessage(typeof(UI_Chatting).Name, uiChattingMesssage));
         }
 
         public int GetUserCount()
