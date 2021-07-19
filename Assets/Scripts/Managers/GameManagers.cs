@@ -32,7 +32,7 @@ namespace Game.Managers
 
         void Start()
         {
-            Player = new Player();
+            // Player = new Player();
             Chatting = new Chatting();
 
             InitUI();
@@ -55,7 +55,7 @@ namespace Game.Managers
         {
             if (!isInitialised) return;
 
-            if (Player != null) Player.OnUpdate(Time.deltaTime);
+            // if (Player != null) Player.OnUpdate(Time.deltaTime);
             if (Chatting != null) Chatting.OnUpdate(Time.deltaTime);
 
             if(uiCommandMessageQueue.Count > 0)
